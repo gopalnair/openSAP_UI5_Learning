@@ -1,0 +1,14 @@
+<mvc:View
+	displayBlock = "true"
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	controllerName="opensap.myapp.controller.App">
+	<Carousel>
+		<pages>
+			<Image src="https://upload.wikimedia.org/wikipedia/commons/0/0e/GEO_Globe_10.jpg" height="400px"/>
+			<Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Wikipedia_Hello_World_Graphic.svg/2000px-Wikipedia_Hello_World_Graphic.svg.png" height="400px"/>
+		</pages>
+	</Carousel>
+	<Button text="Say Hello" press="onShowHello" />
+	
+</mvc:View>
