@@ -7,7 +7,14 @@ sap.ui.define([
 	return Controller.extend("opensap.myapp.controller.App", {
 
 		onShowHello:function(){
-			MessageToast.show("Hello openSAP");
+			//MessageToast.show("Hello openSAP");
+			var oBundle = this.getView().getModel("i18n").getResourceBundle();
+			var sRecipient = this.getView().getModel("helloPanel").getProperty("/recipient/name");
+			
+			//The array here is the parameter list for the text element. In this case, there is only 1 parameter, which will be used in {0}
+			//of helloMsg=Hello {0} in i18n.properties file.
+			var sMsg = oBundle.getText("helloMsg", [sRecipient]); 
+			MessageToast.show(sMsg);
 		}
 		
 
