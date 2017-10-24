@@ -1,5 +1,10 @@
-<mvc:View displayBlock="true" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
-	xmlns="sap.m" controllerName="opensap.myapp.controller.App">
+<mvc:View displayBlock="true" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:core="sap.ui.core" 
+	xmlns:l="sap.ui.layout" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m" 
+	controllerName="opensap.myapp.controller.App">
 	<App>
 		<pages>
 			<Page title="openSAP - Developing with SAPUI5">
@@ -58,7 +63,10 @@
 													path: 'Category',
 													group: true
 												}
-												}">
+												}"
+											growing="true"
+											growingThreshold="5"
+											growingScrollToLoad="false">
 										<headerToolbar>
 											<Toolbar>
 												<Title text="{i18n>productListTitle}"/>
@@ -69,13 +77,27 @@
 										<items>
 											<ObjectListItem title="{Name}"
 												number="{ parts: [ {path: 'Price' }, {path: 'CurrencyCode'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
-												numberUnit="{CurrencyCode}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}" intro="{ProductID}">
+												numberUnit="{CurrencyCode}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}" intro="{ProductID}"
+												press="onItemSelected"
+												type="Active">
 												<firstStatus>
 													<ObjectStatus text="{ parts: [ {path: 'WeightUnit'}, {path: 'WeightMeasure'} ], formatter : '.formatter.delivery' }"/>
 												</firstStatus>
 											</ObjectListItem>
 										</items>
 									</List>
+									<Panel id="productDetailsPanel" 
+										headerText="{i18n>productDetailPanelHeader}" 
+										visible="false">
+										<l:Grid>
+											<Text text="{i18n>productDetailPanelID}: {ProductID}"/>
+											<Text text="{i18n>productDetailPanelName}: {Name}"/>
+											<Text text="{i18n>productDetailPanelDescription}:\n {Description}"/>
+											<Text text="{i18n>productDetailPanelPrice}: {Price}"/>
+										</l:Grid>
+
+									</Panel>
+
 								</content>
 							</IconTabFilter>
 						</items>
