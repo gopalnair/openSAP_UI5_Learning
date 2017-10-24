@@ -5,5 +5,12 @@
       "templateVersion": "1.4.0",
       "dateTimeStamp": "Fri, 20 Oct 2017 01:28:32 GMT"
     }
-  ]
+  ],
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "",
+    "defaultLanguage": "",
+    "defaultI18NPropertyFile": "",
+    "resourceModelName": ""
+  }
 }
