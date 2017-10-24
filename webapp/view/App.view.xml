@@ -16,14 +16,9 @@
 									</pages>
 								</Carousel>
 								<Button text="{i18n>showHelloButtonText}" press="onShowHello"/>
-								<Input value="{
-												path: 'helloPanel>/recipient/name',
-												type: 'sap.ui.model.type.Float',
-												formatOptions: { minFractionDigits:2 },
-												constraints: {maximum:3000}
-											 }" 
-								
-								description="Hello {helloPanel>/recipient/name}" valueLiveUpdate="false" width="60%"/>
+								<Input
+									value="{ path: 'helloPanel>/recipient/name', type: 'sap.ui.model.type.Float', formatOptions: { minFractionDigits:2 }, constraints: {maximum:3000} }"
+									description="Hello {helloPanel>/recipient/name}" valueLiveUpdate="false" width="60%"/>
 							</IconTabFilter>
 							<IconTabFilter id="layouts" text="{i18n>layoutFilter}">
 								<MessageStrip type="Information" showIcon="true" text="Here's a Form Layout inside an Icon Tab Bar …"/>
@@ -57,21 +52,24 @@
 							</IconTabFilter>
 							<IconTabFilter text="{i18n>dataBindingFilter}" key="db">
 								<content>
-									<List headerText="{i18n>productListTitle}" items="{/ProductSet}">
-										<items>
-											<ObjectListItem title="{Name}" 
-											number="{
-												parts: [
-													{path: 'Price' },
-													{path: 'CurrencyCode'}
-												],
-												type: 'sap.ui.model.type.Currency',
-												formatOptions: {
-													showMeasure: false
+									<List id="productsList" items="{
+												path: '/ProductSet',
+												sorter:{
+													path: 'Category',
+													group: true
 												}
-											}" 
-											numberUnit = "{CurrencyCode}"
-											numberState="{= ${Price} > 500 ? 'Error' : 'Success'}" intro="{ProductID}">
+												}">
+										<headerToolbar>
+											<Toolbar>
+												<Title text="{i18n>productListTitle}"/>
+												<ToolbarSpacer/>
+												<SearchField width="50%" search="onFilterProducts"/>
+											</Toolbar>
+										</headerToolbar>
+										<items>
+											<ObjectListItem title="{Name}"
+												number="{ parts: [ {path: 'Price' }, {path: 'CurrencyCode'} ], type: 'sap.ui.model.type.Currency', formatOptions: { showMeasure: false } }"
+												numberUnit="{CurrencyCode}" numberState="{= ${Price} > 500 ? 'Error' : 'Success'}" intro="{ProductID}">
 												<firstStatus>
 													<ObjectStatus text="{ parts: [ {path: 'WeightUnit'}, {path: 'WeightMeasure'} ], formatter : '.formatter.delivery' }"/>
 												</firstStatus>

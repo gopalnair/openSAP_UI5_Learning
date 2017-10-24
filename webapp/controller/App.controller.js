@@ -1,24 +1,43 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageToast",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 	"opensap/myapp/model/formatter"
-], function(Controller,MessageToast, formatter) {
+], function(Controller, MessageToast, Filter, FilterOperator, formatter) {
 	"use strict";
 
 	return Controller.extend("opensap.myapp.controller.App", {
-		formatter : formatter,
-		
-		onShowHello:function(){
+		formatter: formatter,
+
+		onShowHello: function() {
 			//MessageToast.show("Hello openSAP");
 			var oBundle = this.getView().getModel("i18n").getResourceBundle();
 			var sRecipient = this.getView().getModel("helloPanel").getProperty("/recipient/name");
-			
+
 			//The array here is the parameter list for the text element. In this case, there is only 1 parameter, which will be used in {0}
 			//of helloMsg=Hello {0} in i18n.properties file.
-			var sMsg = oBundle.getText("helloMsg", [sRecipient]); 
+			var sMsg = oBundle.getText("helloMsg", [sRecipient]);
 			MessageToast.show(sMsg);
+		},
+
+		onFilterProducts: function(oEvent) {
+
+			// build filter array
+			var aFilter = [],
+				sQuery = oEvent.getParameter("query"),
+				// retrieve list control
+				oList = this.getView().byId("productsList"),
+				// get binding for aggregation 'items'
+				oBinding = oList.getBinding("items");
+
+			if (sQuery) {
+				aFilter.push(new Filter("ProductID", FilterOperator.Contains, sQuery));
+			}
+			// apply filter. an empty filter array simply removes the filter
+			// which will make all entries visible again
+			oBinding.filter(aFilter);
 		}
-		
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
